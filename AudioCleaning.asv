@@ -1,0 +1,21 @@
+function CleanAudio = AudioCleaning(normalized_data,fs,cutoff_frequency)
+    
+    %Create High press filter 
+    [b, a] = butter(4, cutoff_frequency/(fs/2), 'high');
+
+    %Apply high press filter
+    filter_signal = filter(b,a,normalized_data);
+
+    % Apply FFT again
+    audio_length = length(filtered_signal);
+    fft_filtered = fft(filtered_signal);
+    frequency_axis = linspace(0, fs/2, audio_length/2 + 1);
+    magnitude_axis = abs(fft_filtered(1:audio_length/2 + 1));
+
+    %Plot for Frequency Spectrum
+    figure;
+    plot(frequency_axis, magnitude_axis);
+    xlabel('Frequency (Hz)');
+    ylabel('Magnitude');
+    title('Frequency Spectrum After High-Pass Filtering');
+    grid on;

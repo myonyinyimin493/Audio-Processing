@@ -1,0 +1,38 @@
+function [frequency_response, frequency_vector] = LPC_Filter(lpc_cofficient,reconstructed_signal,fs,base_number_point)
+    length_threadholds = fs * 5;
+    fs_threadhold = fs*0.5;
+    audio_length = length(reconstructed_signal);
+    if audio_length > length_threadholds || fs>fs_threadhold
+        num_of_point = round(audio_length/4);
+    else
+        num_of_point = base_number_point;
+    end
+
+    magnitu
+
+    [frequency_response, frequency_vector] = freqz(1, lpc_cofficient(1,:), num_of_point, fs);
+    % Plot the Magnitude Response (in dB)
+    figure;
+    subplot(2, 1, 1);
+    plot(frequency_vector, 20*log10(abs(frequency_response)));  % Magnitude in decibels
+    title('Magnitude Response (dB) for the First Frame with Dynamic Points');
+    xlabel('Frequency (Hz)');
+    ylabel('Magnitude (dB)');
+    grid on;
+
+    % Plot the Phase Response
+    subplot(2, 1, 2);
+    plot(frequency_vector, angle(frequency_response));  % Phase in radians
+    title('Phase Response for the First Frame with Dynamic Points');
+    xlabel('Frequency (Hz)');
+    ylabel('Phase (radians)');
+    grid on;
+
+    % Plot the Amplitude Spectrum (linear)
+    figure;
+    plot(frequency_vector, abs(frequency_response));  % Plot linear amplitude
+    title('Amplitude Spectrum for the First Frame with Dynamic Points');
+    xlabel('Frequency (Hz)');
+    ylabel('Amplitude');
+    grid on;
+end

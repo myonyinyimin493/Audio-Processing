@@ -1,0 +1,5 @@
+function synthesised_speech = Speech_Synthesis(lpc_cofficient,impulse_signal,fs)
+    synthesised_speech=filter(1,lpc_cofficient,impulse_signal);
+    synthesised_speech=synthesised_speech/max(abs(synthesised_speech));
+    sound(synthesised_speech,fs);
+    disp(s)

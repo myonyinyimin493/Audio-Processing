@@ -1,0 +1,18 @@
+function lpc_cofficient = LPC_Cofficient_Estimate(reconstructed_signal, fs)
+
+    if fs > 16000
+        lcp_order = 16
+    elseif fs > 8000
+        lcp_order = 12
+    else
+        lcp_order =10
+    end
+
+    [number_of_frame,~]=size(reconstructed_signal);
+     lpc_cofficient = zeros(number_of_frame,lcp_order+1);
+
+     for i= 1:number_of_frame
+         currentFrame = reconstructed_signal(i,:);
+         lpc_cofficient(i,:) = 
+    
+end

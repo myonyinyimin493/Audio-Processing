@@ -1,0 +1,2 @@
+function energy = Energy_Of_Audio(Framing_function)
+    
